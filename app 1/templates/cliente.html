@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Clients</h1>
+    <form id="add-client-form">
+        <input type="text" id="client-name" placeholder="Client Name" required>
+        <button type="submit">Add Client</button>
+    </form>
+    <ul id="client-list">
+        {% for client in clients %}
+            <li>{{ client.name }}</li>
+        {% endfor %}
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#add-client-form').submit(function(event) {
+                event.preventDefault();
+                var clientName = $('#client-name').val();
+                $.ajax({
+                    url: '/clients',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ name: clientName }),
+                    success: function(response) {
+                        $('#client-list').append('<li>' + clientName + '</li>');
+                        $('#client-name').val('');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

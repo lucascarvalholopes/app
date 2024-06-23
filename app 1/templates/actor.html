@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Actors</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Actors</h1>
+    <ul id="actor-list">
+        {% for actor in actors %}
+            <li>{{ actor.real_name }} - {{ actor.birth_date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
